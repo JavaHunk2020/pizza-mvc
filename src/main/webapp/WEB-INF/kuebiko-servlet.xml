@@ -17,12 +17,16 @@
     	<!-- This is the package name where we keep out model/controller -->
 	<context:component-scan	base-package="com.kuebiko.controller" />
 	
+		
+  <!-- the mvc resources tag does the magic -->
+ <mvc:resources mapping="/img/**" location="/img/" />
+	
 	<!-- Hello I am using JSP -->
 	<bean id="viewResolver"
 		class="org.springframework.web.servlet.view.UrlBasedViewResolver">
 		<property name="viewClass"
 			value="org.springframework.web.servlet.view.JstlView" />
-		<property name="prefix" value="/" />
+		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
         

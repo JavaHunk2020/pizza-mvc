@@ -18,6 +18,7 @@
   <div  class="container">
         <br/>
   		<img src="img/signup.png"  style="height: 120px;">
+  		  <span style="color:red;font-weight: bold;">${message}</span>
   		 <hr/>
   		 
   		 <form action="auth"  method="post">
