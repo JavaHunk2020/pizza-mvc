@@ -16,7 +16,7 @@
     
     	<!-- This is the package name where we keep out model/controller -->
 	<context:component-scan	base-package="com.kuebiko.controller" />
-	
+	<context:component-scan	base-package="com.kuebiko.dao" />
 		
   <!-- the mvc resources tag does the magic -->
  <mvc:resources mapping="/img/**" location="/img/" />
@@ -28,6 +28,14 @@
 			value="org.springframework.web.servlet.view.JstlView" />
 		<property name="prefix" value="/WEB-INF/pages/" />
 		<property name="suffix" value=".jsp" />
+	</bean>
+	
+	<bean id="pkdataSource"		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName"
+			value="com.mysql.jdbc.Driver" />
+		<property name="url" value="jdbc:mysql://localhost:3306/movie_db" />
+		<property name="username" value="root" />
+		<property name="password" value="mysql@1234" />
 	</bean>
         
     </beans>    
