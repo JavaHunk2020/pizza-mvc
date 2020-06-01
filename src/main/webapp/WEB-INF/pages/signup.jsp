@@ -16,11 +16,11 @@
   
   <div  class="container">
         <br/>
-  		<img src="img/signup-2.png"  style="height: 160px;">
+  		<img src="${pageContext.request.contextPath}/img/signup-2.png"  style="height: 160px;">
   		 <h3>User Sign Up</h3>
   		 <hr/>
   		 
-  		 <form action="signup"  method="post">
+  		 <form action="${pageContext.request.contextPath}/signup"  method="post">
   		  Username<b>*</b>
   		   <input type="text"  name="username"  class="form-control"  style="width: 50%;">
   		   
@@ -45,7 +45,7 @@
   		    <br/>
   		   <button type="submit" class="btn btn-primary">Sign Up</button>
   		   
-  		     <a href="login.jsp">
+  		     <a href="${pageContext.request.contextPath}/signup">
   		     <button type="button" class="btn btn-danger">Sign In</button>
   		     </a>
   		   </form>

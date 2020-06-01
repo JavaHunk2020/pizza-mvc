@@ -1,5 +1,7 @@
 package com.kuebiko.dao;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -33,6 +35,14 @@ public class SignupDaoImpl implements SignupDao {
 	
 	@Override
 	public void signup(SignupEntity signupEntity) {
+		//insert into signup_tbl(username,password,email,name,salutation,datecreated) values(?,?,?,?,?,?)
+		Timestamp timestamp=new Timestamp(new Date().getTime());
+		Object[] data= {signupEntity.getUsername(),signupEntity.getPassword(),signupEntity.getEmail(),signupEntity.getName(),signupEntity.getSalutation(),timestamp};
+		jdbcTemplate.update(SQLQuery.INSERT_SIGNUP,data);
+	}
+	
+	@Override
+	public void updateSignup(SignupEntity signupEntity) {
 		Object[] data= {signupEntity.getUsername(),signupEntity.getPassword(),signupEntity.getEmail(),signupEntity.getName(),signupEntity.getSalutation(),signupEntity.getSid()};
 		jdbcTemplate.update(SQLQuery.UPDATE_SIGNUP_BY_SID,data);
 	}

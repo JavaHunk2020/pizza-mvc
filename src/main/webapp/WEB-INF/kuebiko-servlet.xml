@@ -17,6 +17,8 @@
     	<!-- This is the package name where we keep out model/controller -->
 	<context:component-scan	base-package="com.kuebiko.controller" />
 	<context:component-scan	base-package="com.kuebiko.dao" />
+	<context:component-scan	base-package="com.kuebiko.service" />
+	
 		
   <!-- the mvc resources tag does the magic -->
  <mvc:resources mapping="/img/**" location="/img/" />
