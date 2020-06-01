@@ -1,4 +1,4 @@
-<%@page import="com.kuebiko.entity.SignupEntity"%>
+<%@page import="com.kuebiko.controller.dto.SignupDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -49,8 +49,8 @@
     <tbody>
     
     <%
-    List<SignupEntity> signupList =( List<SignupEntity>)request.getAttribute("signupList");
-    for(SignupEntity entity:signupList){
+    List<SignupDTO> signupList =( List<SignupDTO>)request.getAttribute("signupList");
+    for(SignupDTO entity:signupList){
     %>
       <tr>
         <td><%=entity.getUsername() %></td>
