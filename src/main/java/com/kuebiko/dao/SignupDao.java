@@ -12,6 +12,8 @@ public interface SignupDao {
 	void deleteById(int sid);
 	List<SignupEntity> findAll();
 	void updateSignup(SignupEntity signupEntity);
+	List<SignupEntity> getSignups(int pageid, int total);
+	int findTotalSignup();
 
 
 }

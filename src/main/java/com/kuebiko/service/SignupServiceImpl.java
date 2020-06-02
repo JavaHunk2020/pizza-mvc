@@ -59,12 +59,30 @@ public class SignupServiceImpl implements SignupService {
 		}
 		return signupDTOs;
 	}
+	
+	
+	@Override
+	public List<SignupDTO> getSignups(int pageid, int total){
+		List<SignupEntity> list=signupDao.getSignups(pageid,total);
+		List<SignupDTO> signupDTOs=new ArrayList<>();
+		for(SignupEntity entity:list) {
+			SignupDTO signupDTO=new SignupDTO();
+			BeanUtils.copyProperties(entity, signupDTO);
+			signupDTOs.add(signupDTO);
+		}
+		return signupDTOs;
+	}
 
 	@Override
 	public void updateSignup(SignupDTO signupDTO) {
 		SignupEntity signupEntity=new SignupEntity();
 		BeanUtils.copyProperties(signupDTO, signupEntity);
 		signupDao.updateSignup(signupEntity);
+	}
+	
+	@Override
+	public int findTotalSignup() {
+		return signupDao.findTotalSignup();
 	}
 
 }

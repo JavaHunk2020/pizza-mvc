@@ -12,5 +12,7 @@ public interface SignupService {
 	void deleteById(int sid);
 	List<SignupDTO> findAll();
 	void updateSignup(SignupDTO signupEntity);
+	List<SignupDTO> getSignups(int pageid, int total);
+	int findTotalSignup();
 
 }

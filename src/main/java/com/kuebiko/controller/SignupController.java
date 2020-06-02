@@ -45,6 +45,30 @@ public class SignupController {
 			model.addAttribute("entity", entity);
 			return "editSignup";
     } 
+	
+	
+	@GetMapping("/psignup")
+	public String showPaginatedData(@RequestParam(required=false,defaultValue="1") String  pageid,Model model) {
+		int pageSize=2;
+		int ppageid=Integer.parseInt(pageid);
+		if(ppageid<=0) {
+			ppageid=1;
+		}
+		//2
+		//6
+		if(ppageid>1) {
+			ppageid=(ppageid-1)*pageSize+1;  
+		}
+		List<SignupDTO> signupList=signupService.getSignups(ppageid, pageSize);
+		int totalRecords=signupService.findTotalSignup();
+		model.addAttribute("signupList", signupList);
+		model.addAttribute("recordStarts", ppageid);
+		model.addAttribute("pageSize", pageSize);
+		model.addAttribute("pageid", pageid);
+		model.addAttribute("totalRecords", totalRecords);
+		return "psignups";		
+ } 
+ 
  
 	
 	   @GetMapping("/deleteSignup")

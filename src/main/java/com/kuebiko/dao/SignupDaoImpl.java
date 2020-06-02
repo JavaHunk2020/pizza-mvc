@@ -71,5 +71,24 @@ public class SignupDaoImpl implements SignupDao {
 		return signupList;
 	}
 	
+	
+	@Override
+    public List<SignupEntity> getSignups(int pageid,int total) {
+		//1-5
+		//0 ,5
+		//5,5
+		//10,5
+        String sql = "select sid,username,password,email,name,salutation,datecreated from signup_tbl order by sid desc limit "+(pageid-1)+","+total;
+        List<SignupEntity> signupList=jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(SignupEntity.class));
+        return signupList;
+    }
+	
+	
+	@Override
+    public int findTotalSignup() {
+        String sql = "select count(*) from signup_tbl";
+        Integer count=jdbcTemplate.queryForObject(sql, Integer.class);
+        return count;
+    }
 
 }
