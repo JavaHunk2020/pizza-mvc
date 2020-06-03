@@ -14,6 +14,7 @@ public interface SignupDao {
 	void updateSignup(SignupEntity signupEntity);
 	List<SignupEntity> getSignups(int pageid, int total);
 	int findTotalSignup();
+	byte[] findImageById(int sid);
 
 
 }

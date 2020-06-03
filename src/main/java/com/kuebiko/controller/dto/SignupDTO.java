@@ -2,16 +2,35 @@ package com.kuebiko.controller.dto;
 
 import java.sql.Timestamp;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class SignupDTO {
 	private int sid;
 	private String username;
 	private String password;
+    private MultipartFile photo;
+    private byte[] bphoto;
 	private String email;
 	private String name;
 	private String salutation;
 	private Timestamp datecreated;
 	private String role;
 	
+	public byte[] getBphoto() {
+		return bphoto;
+	}
+
+	public void setBphoto(byte[] bphoto) {
+		this.bphoto = bphoto;
+	}
+
+	public MultipartFile getPhoto() {
+		return photo;
+	}
+
+	public void setPhoto(MultipartFile photo) {
+		this.photo = photo;
+	}
 
 	public String getRole() {
 		return role;

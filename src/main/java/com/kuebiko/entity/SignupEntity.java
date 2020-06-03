@@ -11,7 +11,15 @@ public class SignupEntity {
 	private String salutation;
 	private Timestamp datecreated;
 	private String role;
+	private byte[] bphoto;
 	
+	public byte[] getBphoto() {
+		return bphoto;
+	}
+
+	public void setBphoto(byte[] bphoto) {
+		this.bphoto = bphoto;
+	}
 
 	public String getRole() {
 		return role;

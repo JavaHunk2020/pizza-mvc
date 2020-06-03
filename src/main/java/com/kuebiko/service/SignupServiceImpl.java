@@ -34,6 +34,13 @@ public class SignupServiceImpl implements SignupService {
 		BeanUtils.copyProperties(signupDTO, signupEntity);
 		signupDao.signup(signupEntity);
 	}
+	
+	
+
+	@Override
+	public byte[] findImageById(int sid) {
+		return signupDao.findImageById(sid);
+	}
 
 	@Override
 	public SignupDTO findById(int sid) {

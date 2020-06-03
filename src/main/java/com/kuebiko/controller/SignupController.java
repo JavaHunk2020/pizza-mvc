@@ -1,6 +1,11 @@
 package com.kuebiko.controller;
 
+import java.io.IOException;
 import java.util.List;
+
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,8 +31,25 @@ public class SignupController {
 			return "signup";
 	 }
 	 
+	 //<img src="image?sid =1"
+	 @GetMapping("/image")
+		public void showImage(@RequestParam  int sid,HttpServletResponse httpServletResponse) throws IOException {
+		 byte[]  photo=signupService.findImageById(sid);
+		 ServletOutputStream outputStream =httpServletResponse.getOutputStream();
+		 if(photo!=null) {
+			 httpServletResponse.setContentType("image/png");
+			 outputStream.write(photo);
+		 }else {
+			 outputStream.write(new byte[] {});
+		 }
+		 outputStream.flush();
+	   }
+	 
 	 @PostMapping("/signup")
-		public String signupPost(@ModelAttribute SignupDTO signupDTO) {
+		public String signupPost(@ModelAttribute SignupDTO signupDTO) throws IOException {
+		 //MultipartFile into byte[]
+		 byte[] bphoto=signupDTO.getPhoto().getBytes();
+		 signupDTO.setBphoto(bphoto);
 		 signupService.persist(signupDTO);
 			return "login";
 	 }

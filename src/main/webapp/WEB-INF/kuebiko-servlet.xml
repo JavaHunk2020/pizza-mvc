@@ -32,6 +32,8 @@
 		<property name="suffix" value=".jsp" />
 	</bean>
 	
+	  <bean id="multipartResolver" class="org.springframework.web.multipart.support.StandardServletMultipartResolver"/>
+	
 	<bean id="pkdataSource"		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName"
 			value="com.mysql.jdbc.Driver" />

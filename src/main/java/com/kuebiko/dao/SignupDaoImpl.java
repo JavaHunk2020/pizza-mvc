@@ -1,6 +1,7 @@
 package com.kuebiko.dao;
 
 import java.sql.Timestamp;
+import java.sql.Types;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.support.SqlLobValue;
+import org.springframework.jdbc.support.lob.DefaultLobHandler;
+import org.springframework.jdbc.support.lob.LobHandler;
 import org.springframework.stereotype.Repository;
 
 import com.kuebiko.entity.SignupEntity;
@@ -35,16 +39,28 @@ public class SignupDaoImpl implements SignupDao {
 	
 	@Override
 	public void signup(SignupEntity signupEntity) {
-		//insert into signup_tbl(username,password,email,name,salutation,datecreated) values(?,?,?,?,?,?)
+
+        LobHandler lobHandler=new DefaultLobHandler();
+        SqlLobValue sqlLobValue=new SqlLobValue(signupEntity.getBphoto(),lobHandler);
+		
 		Timestamp timestamp=new Timestamp(new Date().getTime());
-		Object[] data= {signupEntity.getUsername(),signupEntity.getPassword(),signupEntity.getEmail(),signupEntity.getName(),signupEntity.getSalutation(),timestamp};
-		jdbcTemplate.update(SQLQuery.INSERT_SIGNUP,data);
+		Object[] data= {signupEntity.getUsername(),signupEntity.getPassword(),signupEntity.getEmail(),
+				signupEntity.getName(),signupEntity.getSalutation(),timestamp,sqlLobValue};
+		jdbcTemplate.update(SQLQuery.INSERT_SIGNUP,data,new int[] {Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,Types.VARCHAR,
+				Types.TIMESTAMP,Types.BLOB});
 	}
 	
 	@Override
 	public void updateSignup(SignupEntity signupEntity) {
+		
 		Object[] data= {signupEntity.getUsername(),signupEntity.getPassword(),signupEntity.getEmail(),signupEntity.getName(),signupEntity.getSalutation(),signupEntity.getSid()};
 		jdbcTemplate.update(SQLQuery.UPDATE_SIGNUP_BY_SID,data);
+	}
+	
+	@Override
+	public byte[]  findImageById(int  sid) {
+		byte[] bphoto=jdbcTemplate.queryForObject(SQLQuery.FIND_IMAGE_BY_ID,new Object[] {sid},byte[].class);
+		return bphoto;
 	}
 	
 	@Override

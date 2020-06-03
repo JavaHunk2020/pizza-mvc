@@ -25,14 +25,6 @@
   		 Current Role : - ${sessionScope.role}
   		  <br/>
   		   <hr/>
-  		 Username :  ${param.username}
-  		 <br/>
-  		 Email :  ${email}<br/>
-  		 Name :  ${name}<br/>
-  		 Salutation :  ${salutation}
-  		 <hr/>
-  		  Total Logged in User : =  <b>${applicationScope.activeSessions-1}</b>
-  		  <hr/>
   		<span style="background-color: red;font-weight: bold;"> ${param.message}</span>
   		<hr/>
   		 <table class="table table-bordered">
@@ -43,6 +35,7 @@
         <th>Email</th>
         <th>Salutation</th>
         <th>Created Date</th>
+        <th>Photo</th>
            <th>Action</th>
       </tr>
     </thead>
@@ -58,7 +51,9 @@
         <td><%=entity.getEmail() %></td>
           <td><%=entity.getSalutation() %></td>
             <td><%=entity.getDatecreated() %></td>
-            
+            <td>
+            <img src="${pageContext.request.contextPath}/image?sid=<%=entity.getSid() %>" style="height: 100px;">
+          </td>
             <td>
             <a href="deleteSignup?sid=<%=entity.getSid() %>">
                    <img src="img/del.png"  style="height: 40px;">

@@ -20,7 +20,7 @@
   		 <h3>User Sign Up</h3>
   		 <hr/>
   		 
-  		 <form action="${pageContext.request.contextPath}/signup"  method="post">
+  		 <form action="${pageContext.request.contextPath}/signup"  method="post"  enctype="multipart/form-data">
   		  Username<b>*</b>
   		   <input type="text"  name="username"  class="form-control"  style="width: 50%;">
   		   
@@ -40,8 +40,8 @@
   		        <option>Miss</option>
   		   </select>
   		   
-  		   
-  		   
+  		      Photo<b>*</b>
+  		   <input type="file"  name="photo"  class="form-control"  style="width: 50%;background-color: #ecffde;height: 44px">
   		    <br/>
   		   <button type="submit" class="btn btn-primary">Sign Up</button>
   		   

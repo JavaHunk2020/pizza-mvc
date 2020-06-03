@@ -14,5 +14,6 @@ public interface SignupService {
 	void updateSignup(SignupDTO signupEntity);
 	List<SignupDTO> getSignups(int pageid, int total);
 	int findTotalSignup();
+	byte[] findImageById(int sid);
 
 }
