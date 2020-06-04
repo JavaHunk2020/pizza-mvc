@@ -1,10 +1,13 @@
 package com.kuebiko.service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.kuebiko.controller.dto.SignupDTO;
@@ -15,6 +18,7 @@ import com.kuebiko.entity.SignupEntity;
 public class SignupServiceImpl implements SignupService {
 	
 	 @Autowired
+	 @Qualifier("SignupOrmDaoImpl")
 	 private SignupDao signupDao;
 
 	@Override

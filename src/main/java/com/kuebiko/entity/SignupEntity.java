@@ -2,6 +2,15 @@ package com.kuebiko.entity;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+@Entity ///this class object will be saved into database
+@Table(name="bsignup_tbl")
 public class SignupEntity {
 	private int sid;
 	private String username;
@@ -13,6 +22,8 @@ public class SignupEntity {
 	private String role;
 	private byte[] bphoto;
 	
+	
+    @Column(columnDefinition="longblob")
 	public byte[] getBphoto() {
 		return bphoto;
 	}
@@ -21,6 +32,7 @@ public class SignupEntity {
 		this.bphoto = bphoto;
 	}
 
+	 @Column(columnDefinition = "varchar(30) default 'customer'")
 	public String getRole() {
 		return role;
 	}
@@ -29,6 +41,8 @@ public class SignupEntity {
 		this.role = role;
 	}
 
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	public int getSid() {
 		return sid;
 	}
@@ -37,6 +51,8 @@ public class SignupEntity {
 		this.sid = sid;
 	}
 
+	
+	@Column(length=100)
 	public String getUsername() {
 		return username;
 	}
@@ -45,6 +61,7 @@ public class SignupEntity {
 		this.username = username;
 	}
 
+	@Column(length=40)
 	public String getPassword() {
 		return password;
 	}
@@ -53,6 +70,7 @@ public class SignupEntity {
 		this.password = password;
 	}
 
+	@Column(length=200)
 	public String getEmail() {
 		return email;
 	}

@@ -1,6 +1,8 @@
 package com.kuebiko.controller;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletOutputStream;
@@ -50,6 +52,8 @@ public class SignupController {
 		 //MultipartFile into byte[]
 		 byte[] bphoto=signupDTO.getPhoto().getBytes();
 		 signupDTO.setBphoto(bphoto);
+		 signupDTO.setRole("customer");
+		 signupDTO.setDatecreated(new Timestamp(new Date().getTime()));
 		 signupService.persist(signupDTO);
 			return "login";
 	 }

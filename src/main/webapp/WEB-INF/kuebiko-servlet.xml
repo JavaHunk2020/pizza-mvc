@@ -41,5 +41,28 @@
 		<property name="username" value="root" />
 		<property name="password" value="mysql@1234" />
 	</bean>
-        
+	
+	
+	<!-- 
+       Create a session factory
+     -->
+      <bean id="psessionFactory"   class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource"      ref="pkdataSource"/>
+        <property name="packagesToScan"  value="com.kuebiko.entity"/>
+        <property name="hibernateProperties">
+            <props>
+            <!-- below will generate schema for you -->
+                <prop key="hibernate.hbm2ddl.auto">update</prop>    
+                                 <!-- below will generate database specific query -->
+                   <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5InnoDBDialect</prop>
+                 <!-- Below will print the  --> 
+                <prop key="hibernate.show_sql">true</prop>
+            </props>
+        </property>
+    </bean>
+    
+        <bean id="transactionManager"    class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+                <property name="sessionFactory" ref="psessionFactory"/>
+    </bean>
+            
     </beans>    
