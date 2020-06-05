@@ -9,12 +9,15 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.kuebiko.controller.dto.SignupDTO;
 import com.kuebiko.dao.SignupDao;
 import com.kuebiko.entity.SignupEntity;
+import com.kuebiko.utils.Utils;
 
 @Service
+@Transactional
 public class SignupServiceImpl implements SignupService {
 	
 	 @Autowired
@@ -86,8 +89,10 @@ public class SignupServiceImpl implements SignupService {
 
 	@Override
 	public void updateSignup(SignupDTO signupDTO) {
+		SignupDTO dbsignupDTO=findById(signupDTO.getSid());
+		Utils.copyNonNullProperties(signupDTO, dbsignupDTO);
 		SignupEntity signupEntity=new SignupEntity();
-		BeanUtils.copyProperties(signupDTO, signupEntity);
+		BeanUtils.copyProperties(dbsignupDTO, signupEntity);
 		signupDao.updateSignup(signupEntity);
 	}
 	

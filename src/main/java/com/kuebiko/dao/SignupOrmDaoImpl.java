@@ -9,19 +9,19 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.kuebiko.entity.SignupEntity;
 
 @Repository("SignupOrmDaoImpl")
-@Transactional
 public class SignupOrmDaoImpl implements SignupDao {
 	
     @Autowired
     private SessionFactory sessionFactory;
     
     private Session getSession(){
-             return sessionFactory.openSession();
+             return sessionFactory.getCurrentSession();
     }
 
 
@@ -52,9 +52,10 @@ public class SignupOrmDaoImpl implements SignupDao {
 
 	@Override
 	public void deleteById(int sid) {
-		Session session=getSession();
-		SignupEntity entity=session.get(SignupEntity.class, sid);
-		session.delete(entity);
+		boolean babab=org.springframework.transaction.support.TransactionSynchronizationManager.isActualTransactionActive();
+		   Session session = sessionFactory.getCurrentSession();
+		   SignupEntity signupEntity = session.byId(SignupEntity.class).load(sid);
+	       session.delete(signupEntity);
 	}
 
 	@Override
@@ -65,12 +66,16 @@ public class SignupOrmDaoImpl implements SignupDao {
 
 	@Override
 	public void updateSignup(SignupEntity signupEntity) {
-		getSession().update(signupEntity);
+		getSession().merge(signupEntity);
 	}
 
 	@Override
 	public List<SignupEntity> getSignups(int pageid, int total) {
-		return null;
+		Query query=getSession().createQuery("from SignupEntity");
+        query.setFirstResult(pageid-1);
+        query.setMaxResults(total);
+        List<SignupEntity> entities = query.list();
+		return entities;
 	}
 
 	@Override
