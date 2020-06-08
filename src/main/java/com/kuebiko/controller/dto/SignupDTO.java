@@ -4,11 +4,18 @@ import java.sql.Timestamp;
 
 import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+
+
+@JsonInclude(value=Include.NON_NULL)
 public class SignupDTO {
 	private int sid;
 	private String username;
 	private String password;
     private MultipartFile photo;
+    @JsonIgnore
     private byte[] bphoto;
 	private String email;
 	private String name;

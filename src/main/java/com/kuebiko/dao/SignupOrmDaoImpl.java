@@ -34,7 +34,7 @@ public class SignupOrmDaoImpl implements SignupDao {
 		 try {
 		      loginHistoryEntity=query.getSingleResult();
 		 }catch (Exception e) {
-			 e.printStackTrace();
+			 //e.printStackTrace();
 		}
 		return loginHistoryEntity;
 	}
